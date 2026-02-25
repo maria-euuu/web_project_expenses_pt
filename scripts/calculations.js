@@ -12,12 +12,9 @@ let expenseEntries = [
   ["subscriptions", 12],
 ];
 
-console.log(expenseEntries);
-
 for (expenseEntrie of expenseEntries) {
   totalExpensesValue = totalExpensesValue + expenseEntrie[1];
 }
-console.log(totalExpensesValue);
 
 function calculateAverageExpense() {
   if (expenseEntries === 0) {
@@ -74,8 +71,6 @@ let categoriesTotals = [
   ["subscriptions", calculateCategoryExpenses("subscriptions")],
 ];
 
-// console.log(categoriesTotals);
-
 // função para achar a maior categoria
 function calculateLargestCategory() {
   // declarando a variável da categoria atual
@@ -122,7 +117,3 @@ function addExpenseEntry() {
   updateCategoriesTotals();
   return totalExpensesValue;
 }
-
-console.log(categoriesTotals);
-addExpenseEntry();
-calculateCategoryExpenses(newExpenseCategory);
