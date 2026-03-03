@@ -97,23 +97,7 @@ function updateCategoriesTotals() {
   ];
 }
 
-// cria a variável da categoria da nova despesa
-let newExpenseCategory = document.getElementById(
-  "expense-category-input",
-).value;
-
-// criar uma função que adiciona uma despesa. retorna o valor total de gastos e incrementa o valor a sua categoria
-function addExpenseEntry() {
-  // cria a variável do valor da nova despesa
-  let newExapanseValue = Number(
-    document.getElementById("expense-amount-input").value,
-  );
-  // atualiza o valor das despesas totais (totalExpenseValue) adicionando o valor
-  totalExpensesValue += newExapanseValue;
-
-  // atualiza a lista de despesas categoria/valor adicionando no array (expenseEntries)
-  expenseEntries.push([newExpenseCategory, newExapanseValue]);
-  // chama a função que atualiza o total de cada categoria
-  updateCategoriesTotals();
-  return totalExpensesValue;
+function addExpenseEntry(values) {
+  totalExpensesValue += values[1];
+  expenseEntries.push(values);
 }
