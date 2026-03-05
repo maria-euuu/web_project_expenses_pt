@@ -61,40 +61,39 @@ function calculateCategoryExpenses(category) {
   return categorySum;
 }
 
-// array do total de cada categoria
-
-let categoriesTotals = [
-  ["groceries", calculateCategoryExpenses("groceries")],
-  ["restaurants", calculateCategoryExpenses("restaurants")],
-  ["transport", calculateCategoryExpenses("transport")],
-  ["home", calculateCategoryExpenses("home")],
-  ["subscriptions", calculateCategoryExpenses("subscriptions")],
-];
+let categoriesTotals = [];
 
 // função para achar a maior categoria
 function calculateLargestCategory() {
-  // declarando a variável da categoria atual
-  let largestCategory = categoriesTotals[0];
+  const uniqueCategories = [
+    "groceries",
+    "restaurants",
+    "transport",
+    "home",
+    "subscriptions",
+  ];
 
-  // loop que passa por todas das categorias e seus valores
+  for (uniqueCategory of uniqueCategories) {
+    categoriesTotals.push([
+      uniqueCategory,
+      calculateCategoryExpenses(uniqueCategory),
+    ]);
+  }
+  let largestCategoryValue = 0;
+  let largestCategoryTitle = "";
+  // loop dos totais das categorias
   for (categoryTotal of categoriesTotals) {
-    //verifica se o total da categoria atual é maior que o da categoria analisada
-    if (categoryTotal[1] > largestCategory[1]) {
-      // substituindo pelo maior valor se ele for maior
-      largestCategory = categoryTotal;
+    // variavel que guarda o valor do elemento em voga
+    let currentValue = categoryTotal[1];
+    // variavel que guarda o nome da categoria em voga
+    let currentCategory = categoryTotal[0];
+    // condicional que verifica se o valor do elemento em voga é maior que o maior valor ja escontrado
+    if (currentValue > largestCategoryValue) {
+      largestCategoryValue = currentValue;
+      largestCategoryTitle = currentCategory;
     }
   }
-  return largestCategory[0];
-}
-
-function updateCategoriesTotals() {
-  categoriesTotals = [
-    ["groceries", calculateCategoryExpenses("groceries")],
-    ["restaurants", calculateCategoryExpenses("restaurants")],
-    ["transport", calculateCategoryExpenses("transport")],
-    ["home", calculateCategoryExpenses("home")],
-    ["subscriptions", calculateCategoryExpenses("subscriptions")],
-  ];
+  return largestCategoryTitle;
 }
 
 function addExpenseEntry(values) {
