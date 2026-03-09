@@ -12,12 +12,12 @@ let expenseEntries = [
   ["subscriptions", 12],
 ];
 
-for (expenseEntrie of expenseEntries) {
-  totalExpensesValue = totalExpensesValue + expenseEntrie[1];
+for (const expenseEntry of expenseEntries) {
+  totalExpensesValue = totalExpensesValue + expenseEntry[1];
 }
 
 function calculateAverageExpense() {
-  if (expenseEntries === 0) {
+  if (expenseEntries.length === 0) {
     return 0;
   } else {
     return totalExpensesValue / expenseEntries.length;
@@ -31,10 +31,11 @@ function calculateBalance() {
 let balanceColor = "green";
 
 function updateBalanceColor() {
-  if (calculateBalance < 0) {
+  if (calculateBalance() < 0) {
     balanceColor = "red";
   } else if (
-    (calculateBalance < 0 && calculateBalance > calculateBalance * 0, 25)
+    calculateBalance() > 0 &&
+    calculateBalance() < budgetValue * 0.25
   ) {
     balanceColor = "orange";
   } else {
@@ -47,11 +48,11 @@ function calculateCategoryExpenses(category) {
   // soma de uma categoria específica
   let categorySum = 0;
   // loop que passa por todas as categorias
-  for (expenseEntrie of expenseEntries) {
+  for (expenseEntry of expenseEntries) {
     // criando a variável do valor da categoria
-    let categoryValue = expenseEntrie[1];
+    let categoryValue = expenseEntry[1];
     // criando a variável da categoria específica
-    let currentCategory = expenseEntrie[0];
+    let currentCategory = expenseEntry[0];
     // escolher se vou somar essa categoria ou não
     if (currentCategory === category) {
       categorySum += categoryValue;
@@ -61,19 +62,18 @@ function calculateCategoryExpenses(category) {
   return categorySum;
 }
 
-let categoriesTotals = [];
-
 // função para achar a maior categoria
 function calculateLargestCategory() {
-  const uniqueCategories = [
+  let categoriesTotals = [];
+  const uniqueCategories = new Set([
     "groceries",
     "restaurants",
     "transport",
     "home",
     "subscriptions",
-  ];
+  ]);
 
-  for (uniqueCategory of uniqueCategories) {
+  for (const uniqueCategory of uniqueCategories) {
     categoriesTotals.push([
       uniqueCategory,
       calculateCategoryExpenses(uniqueCategory),
