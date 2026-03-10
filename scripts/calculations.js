@@ -31,12 +31,10 @@ function calculateBalance() {
 let balanceColor = "green";
 
 function updateBalanceColor() {
-  if (calculateBalance() < 0) {
+  const balance = calculateBalance();
+  if (balance < 0) {
     balanceColor = "red";
-  } else if (
-    calculateBalance() > 0 &&
-    calculateBalance() < budgetValue * 0.25
-  ) {
+  } else if (balance > 0 && balance < budgetValue * 0.25) {
     balanceColor = "orange";
   } else {
     balanceColor = "green";
@@ -65,24 +63,19 @@ function calculateCategoryExpenses(category) {
 // função para achar a maior categoria
 function calculateLargestCategory() {
   let categoriesTotals = [];
-  const uniqueCategories = new Set([
-    "groceries",
-    "restaurants",
-    "transport",
-    "home",
-    "subscriptions",
-  ]);
-
+  const uniqueCategories = new Set(expenseEntries.map((entry) => entry[0]));
   for (const uniqueCategory of uniqueCategories) {
     categoriesTotals.push([
       uniqueCategory,
       calculateCategoryExpenses(uniqueCategory),
     ]);
   }
+
   let largestCategoryValue = 0;
   let largestCategoryTitle = "";
+
   // loop dos totais das categorias
-  for (categoryTotal of categoriesTotals) {
+  for (let categoryTotal of categoriesTotals) {
     // variavel que guarda o valor do elemento em voga
     let currentValue = categoryTotal[1];
     // variavel que guarda o nome da categoria em voga
